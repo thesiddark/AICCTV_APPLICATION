@@ -23,7 +23,7 @@ class ViewOwnPost extends StatelessWidget {
       title: 'Flutter demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const ViewSuspiciousActivity(),
@@ -122,7 +122,7 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(250, 30, 90, 105),
+        backgroundColor: Color.fromARGB(250, 255, 255, 255),
         // Set the background color here
         appBar: AppBar(
           leading: BackButton(
@@ -134,7 +134,7 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
             },
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
-          title: Text("suspecious activity"),
+          title: Text("Suspecious Activity"),
         ),
         body: ListView.builder(
           physics: BouncingScrollPhysics(),

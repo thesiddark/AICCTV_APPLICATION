@@ -109,7 +109,7 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(250, 30, 90, 105),
+        backgroundColor: Color.fromARGB(250, 255, 255, 255),
         // Set the background color here
         appBar: AppBar(
           leading: BackButton(

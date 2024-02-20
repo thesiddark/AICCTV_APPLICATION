@@ -23,7 +23,7 @@ class ViewOwnPost extends StatelessWidget {
       title: 'Flutter demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const PublicViewCriminals(),
@@ -109,7 +109,7 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
         return true;
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(250, 30, 90, 105),
+        backgroundColor: Color.fromARGB(250, 255, 255, 255),
         // Set the background color here
         appBar: AppBar(
           leading: BackButton(

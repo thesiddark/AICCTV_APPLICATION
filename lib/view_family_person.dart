@@ -146,9 +146,12 @@ class _MyViewFamilyPersonState extends State<MyViewFamilyPerson> {
                             width: 250,
                             child: Padding(
                               padding: EdgeInsets.all(10),
-                              child: Image(
-                                image: NetworkImage(photo_[index], scale: 2),
-                                fit: BoxFit.cover,
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                child: Image(
+                                  image: NetworkImage(photo_[index], scale: 2),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -227,7 +230,12 @@ class _MyViewFamilyPersonState extends State<MyViewFamilyPerson> {
                                           ),
                                         ));
                                   },
-                                  child: Text('edit')),
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.blue,
+                                    size: 24.0,
+                                    semanticLabel: 'edit',
+                                  ),),
                               SizedBox(
                                 width: 150,
                               ),
@@ -278,7 +286,12 @@ class _MyViewFamilyPersonState extends State<MyViewFamilyPerson> {
                                     // },
                                     // child: Text("Cancel"),
                                   },
-                                  child: Text('delete')),
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.blue,
+                                    size: 24.0,
+                                    semanticLabel: 'edit',
+                                  ),),
                             ],
                           )
                         ],

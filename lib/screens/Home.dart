@@ -17,6 +17,7 @@ import 'package:aicctv/res/lists.dart';
 import 'package:aicctv/widgets/text_widget.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 
 // import '../ip.dart';
 // import '../courses.dart';
@@ -294,10 +295,10 @@ class _HomeState extends State<Home> {
                                 top: 10,
                                 right: 10,
                                 child: IconButton(
-                                  icon: Icon(
-                                    Icons.notification_important,
-                                    color: Colors.white,
-                                    size: 35,
+                                  icon: Lottie.asset(
+                                    "assets/notification1.json",
+                                    width: 60,
+                                    fit: BoxFit.fill,
                                   ),
                                   onPressed: () {
                                     Navigator.push(
@@ -437,7 +438,7 @@ class _HomeState extends State<Home> {
                             size: 30,
                           ),
                           Icon(
-                            Icons.add_box_rounded,
+                            Icons.star,
                             color: Colors.black,
                             size: 30,
                           ),

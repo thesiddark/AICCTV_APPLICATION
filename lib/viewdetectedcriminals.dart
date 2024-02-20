@@ -24,7 +24,7 @@ class ViewDetectedCriminals extends StatelessWidget {
     return MaterialApp(
       title: 'View Detected Criminals',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const ViewDetectedCriminalsPage(title: 'View Detected Criminals'),
