@@ -78,6 +78,7 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.only(top: 30, left: 0, right: 0),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
+
           child: Stack(
             children: [
               AnimatedPositioned(
@@ -295,10 +296,10 @@ class _HomeState extends State<Home> {
                                 top: 10,
                                 right: 10,
                                 child: IconButton(
-                                  icon: Lottie.asset(
-                                    "assets/notification1.json",
-                                    width: 60,
-                                    fit: BoxFit.fill,
+                                  icon: Icon(
+                                    Icons.notification_important,
+                                    color: Colors.white,
+                                    size: 35,
                                   ),
                                   onPressed: () {
                                     Navigator.push(
@@ -367,14 +368,14 @@ class _HomeState extends State<Home> {
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 400),
                     opacity: opacity,
-                    child: Container(
+                  /*  child: Container(
                       height: 450,
                       width: 400,
                       decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage('assets/images/akfor.png'),
                               fit: BoxFit.fill)),
-                    ),
+                    ),*/
                   )),
               doctorList(),
               Align(

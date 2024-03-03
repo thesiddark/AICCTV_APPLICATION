@@ -60,7 +60,7 @@ class _MyIpPageState extends State<MyIpPage> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/login.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/images/loginpage.jpg'), fit: BoxFit.cover),
         ),
         child: Form(
           key: _formKey,

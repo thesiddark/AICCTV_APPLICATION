@@ -107,7 +107,7 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
       backgroundColor: Color.fromARGB(255, 228, 213, 231),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -115,9 +115,12 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
             SizedBox(
               height: 280,
               width: double.infinity,
-              child: Image.network(
-                photo_,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(29), // Adjust the radius as needed
+                child: Image.network(
+                  photo_,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Container(
@@ -130,7 +133,7 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
                         padding: EdgeInsets.all(16.0),
                         margin: EdgeInsets.only(top: 16.0),
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(126, 13, 122, 152),
+                            color: Color.fromARGB(126, 9, 34, 37),
                             borderRadius: BorderRadius.circular(20.0)),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +183,7 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
                   SizedBox(height: 20.0),
                   Container(
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(126, 13, 122, 152),
+                      color: Color.fromARGB(126, 9, 34, 37),
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Column(
