@@ -120,122 +120,136 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
         //
         //   title: Text(widget.title),
         // ),
-        body: Container(
-          decoration:  BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage('photos'), fit: BoxFit.cover),
-                borderRadius: BorderRadius.circular(20.0),
-          ),
-          child: Center(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  if (_selectedImage != null) ...{
-                    InkWell(
-                      child: Image.file(
-                        _selectedImage!,
-                        height: 400,
+        body: SingleChildScrollView(
+          child: Container(
+            decoration:  BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage('photos'), fit: BoxFit.cover),
+                  borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Center(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    if (_selectedImage != null) ...{
+                      InkWell(
+                        child: Image.file(
+                          _selectedImage!,
+                          height: 400,
+                        ),
+                        radius: 399,
+                        onTap: _checkPermissionAndChooseImage,
+                        // borderRadius: BorderRadius.all(Radius.circular(200)),
                       ),
-                      radius: 399,
-                      onTap: _checkPermissionAndChooseImage,
-                      // borderRadius: BorderRadius.all(Radius.circular(200)),
-                    ),
-                  } else ...{
-                    // Image(image: NetworkImage(),height: 100, width: 70,fit: BoxFit.cover,),
-                    InkWell(
-                      onTap: _checkPermissionAndChooseImage,
-                      child: Column(
-                        children: [
-                          Image(
-                            image: NetworkImage(photos),
-                            height: 200,
-                            width: 200,
-                          ),
-                          Text('Select Image',
-                              style: TextStyle(color: Colors.cyan))
-                        ],
+                    } else ...{
+                      // Image(image: NetworkImage(),height: 100, width: 70,fit: BoxFit.cover,),
+                      InkWell(
+                        onTap: _checkPermissionAndChooseImage,
+                        child: Column(
+                          children: [
+                            Image(
+                              image: NetworkImage(photos),
+                              height: 200,
+                              width: 200,
+                            ),
+                            Text('Select Image',
+                                style: TextStyle(color: Colors.cyan))
+                          ],
+                        ),
                       ),
-                    ),
-                  },
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      validator: (value) => Validatecomplaints(value!),
-                      controller: namecontroller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Name',
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      validator: (value) => Validatecomplaints(value!),
-                      controller: relationcontroller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Relation',
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
+                    },
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: TextFormField(
+                        validator: (value) => Validatecomplaints(value!),
+                        controller: namecontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Name',
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      validator: (value) => Validatecomplaints(value!),
-                      controller: placecontroller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Place',
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: TextFormField(
+                        validator: (value) => Validatecomplaints(value!),
+                        controller: relationcontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Relation',
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      validator: (value) => Validatecomplaints(value!),
-                      controller: Emailcontroller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Email',
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: TextFormField(
+                        validator: (value) => Validatecomplaints(value!),
+                        controller: placecontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Place',
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: TextFormField(
-                      validator: (value) => Validatecomplaints(value!),
-                      controller: Phonecontroller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Phone',
-                        fillColor: Colors.grey.shade300,
-                        filled: true,
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: TextFormField(
+                        validator: (value) => Validatecomplaints(value!),
+                        controller: Emailcontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Email',
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+                        ),
                       ),
                     ),
-                  ),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: TextFormField(
+                        // validator: (value) => Validatecomplaints(value!),
+                        validator: (v){
+                          if(v!.isEmpty ||
+                              !RegExp(r"^[6789][0-9]{9}")
+                                  .hasMatch(v)) {
+
+                            return 'enter valid number';
+                          }
+
+                          return null;
+                        },
+
+                        controller: Phonecontroller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Phone',
+                          fillColor: Colors.grey.shade300,
+                          filled: true,
+
+                        ),
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          sendata();
-                        }
-                      },
-                      child: Text('send'))
-                ],
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            sendata();
+                          }
+                        },
+                        child: Text('send'))
+                  ],
+                ),
               ),
             ),
           ),
@@ -257,10 +271,11 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
     final urls = Uri.parse('$url/user_edit_family_members_post/');
     try {
       final response = await http.post(urls, body: {
+        "photo": photo,
         'name': name,
         'relation': relation,
         'place': place,
-        'email': email,
+        'email_id': email,
         'phone': phone,
         'lid': sh.getString("lid").toString(),
         'fid': sh.getString("fid").toString(),
@@ -291,6 +306,16 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
   String? Validatecomplaints(String value) {
     if (value.isEmpty) {
       return 'please enter your Name';
+    }
+    return null;
+  }
+  String? Validatephone(String value) {
+
+    if (value == null || value.isEmpty) {
+      return 'Please enter a phone number';
+    }
+    else if (value.length != 10) { // Assuming a 10-digit format
+      return 'Please enter a valid 10-digit phone number';
     }
     return null;
   }
@@ -333,6 +358,68 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
       );
     }
   }
+
+  String? Validatename(String value){
+    if(value.isEmpty){
+      return 'please enter your Name';
+    }
+    return null;
+  }
+  String? Validatedob(String value){
+    if(value.isEmpty){
+      return 'please enter your dob';
+    }
+    return null;
+  }
+
+
+    String? Validateplace(String value){
+    if(value.isEmpty){
+      return 'please enter your place';
+    }
+    return null;
+  }String? Validatexperience(String value){
+    if(value.isEmpty){
+      return 'please enter your experience';
+    }
+    return null;
+  }String? Validatequalification(String value){
+    if(value.isEmpty){
+      return 'please enter your qualification';
+    }
+    return null;
+  }
+  String? Validatecity(String value){
+    if(value.isEmpty){
+      return 'please enter your district';
+    }
+    return null;
+  }
+  String? Validatestate(String value){
+    if(value.isEmpty){
+      return 'please enter your state';
+    }
+    return null;
+  }
+  String? Validatepassword(String value){
+    if(value.isEmpty){
+      return 'please enter your password';
+    }
+    return null;
+  }
+  String? Validateconfirmpswd(String value){
+    if(value.isEmpty){
+      return 'please  enter password again to confirm password';
+    }
+    return null;
+  }
+  String? Validatemail(String value){
+    if(value.isEmpty){
+      return 'please enter Email';
+    }
+    return null;
+  }
+
 
   String photo = '';
 }

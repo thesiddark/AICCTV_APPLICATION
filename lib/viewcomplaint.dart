@@ -73,8 +73,8 @@ class _ViewReplyPageState extends State<ViewReplyPage> {
 
       for (int i = 0; i < arr.length; i++) {
         id.add(arr[i]['id'].toString());
-        date.add(arr[i]['date']);
-        complaint.add(arr[i]['complaint']);
+        date.add(arr[i]['date'].toString());
+        complaint.add(arr[i]['complaint'].toString());
         reply.add(arr[i]['reply']);
         status.add(arr[i]['status']);
       }

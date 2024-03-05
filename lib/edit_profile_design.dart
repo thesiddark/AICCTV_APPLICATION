@@ -136,7 +136,7 @@ class _MyEditPageState extends State<MyEditPage> {
                   child: Column(
                     children: [
                       Image(
-                        image: NetworkImage(image),
+                        image: NetworkImage(photo),
                         height: 200,
                         width: 200,
                       ),
