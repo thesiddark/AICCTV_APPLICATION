@@ -121,9 +121,10 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
         //   title: Text(widget.title),
         // ),
         body: Container(
-          decoration: const BoxDecoration(
+          decoration:  BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage('photos'), fit: BoxFit.cover),
+                borderRadius: BorderRadius.circular(20.0),
           ),
           child: Center(
             child: Form(

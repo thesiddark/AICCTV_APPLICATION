@@ -368,14 +368,14 @@ class _HomeState extends State<Home> {
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 400),
                     opacity: opacity,
-                  /*  child: Container(
+                    child: Container(
                       height: 450,
                       width: 400,
                       decoration: const BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('assets/images/akfor.png'),
+                              image: AssetImage('/assets/images/akfor.png'),
                               fit: BoxFit.fill)),
-                    ),*/
+                    ),
                   )),
               doctorList(),
               Align(
