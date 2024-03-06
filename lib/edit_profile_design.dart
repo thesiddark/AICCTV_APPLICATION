@@ -41,6 +41,7 @@ class MyEditPage extends StatefulWidget {
 }
 
 class _MyEditPageState extends State<MyEditPage> {
+  final _formKey = GlobalKey<FormState>();
   _MyEditPageState() {
     _get_data();
   }
@@ -116,7 +117,9 @@ class _MyEditPageState extends State<MyEditPage> {
           title: Text(widget.title),
         ),
         body: SingleChildScrollView(
-          child: Column(
+             child: Form(
+               key: _formKey,
+              child:Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (_selectedImage != null) ...{
@@ -147,10 +150,17 @@ class _MyEditPageState extends State<MyEditPage> {
               },
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                  if(v!.isEmpty){
+                    return 'Must enter your Name';
+                  }
+                  return null;
+                },
                   controller: namecontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), label: Text("Name")),
+
                 ),
               ),
               RadioListTile(
@@ -185,7 +195,15 @@ class _MyEditPageState extends State<MyEditPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value)) {
+                      return 'Enter a valid Email!';
+                    }
+                    return null;
+                  },
                   controller: Emailcontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), label: Text("Email")),
@@ -193,7 +211,15 @@ class _MyEditPageState extends State<MyEditPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty ||
+                        !RegExp(r"^[6789]\d{9}$")
+                            .hasMatch(v)) {
+                      return 'Enter valid Phone Number';
+                    }
+                    return null;
+                  },
                   controller: Phonecontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), label: Text("Phone")),
@@ -201,7 +227,13 @@ class _MyEditPageState extends State<MyEditPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty){
+                      return 'Must enter valid Place';
+                    }
+                    return null;
+                  },
                   controller: placecontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), label: Text("Place")),
@@ -209,7 +241,13 @@ class _MyEditPageState extends State<MyEditPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty){
+                      return 'Must enter valid Post';
+                    }
+                    return null;
+                  },
                   controller: postcontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), label: Text("Post")),
@@ -217,7 +255,15 @@ class _MyEditPageState extends State<MyEditPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty ||
+                        !!RegExp(r"^\d{1,6}$")
+                            .hasMatch(v)) {
+                      return 'Enter valid Pin';
+                    }
+                    return null;
+                  },
                   controller: pincontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), label: Text("Pin")),
@@ -225,7 +271,15 @@ class _MyEditPageState extends State<MyEditPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty||
+                        !RegExp(r'^[A-Za-z\s]+$')
+                            .hasMatch(v)){
+                      return 'Must Enter District';
+                    }
+                    return null;
+                  },
                   controller: districtcontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), label: Text("District")),
@@ -233,16 +287,20 @@ class _MyEditPageState extends State<MyEditPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  _send_data();
+                  if (_formKey.currentState!.validate()) {
+                    _send_data();
+                  }
                 },
                 child: Text("Update"),
               ),
+              SizedBox(height: 50,)
             ],
           ),
         ),
       ),
-    );
+    ));
   }
+
 
   void _send_data() async {
     String uname = namecontroller.text;

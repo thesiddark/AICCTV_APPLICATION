@@ -86,6 +86,7 @@ flutter:
     - assets/aicctv.png
     - assets/images/akfor.png
     - assets/images/loginpage.jpg
+    - assets/images/profileselect.png
     - assets/detective.json
     - assets/notification1.json
   #   - images/a_dot_ham.jpeg

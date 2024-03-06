@@ -469,7 +469,7 @@ class _HomeState extends State<Home> {
       if (response.statusCode == 200) {
         String status = jsonDecode(response.body)['status'];
         if (status == 'ok') {
-          Fluttertoast.showToast(msg: 'Success');
+          Fluttertoast.showToast(msg: 'HOME');
 
           setState(() {
             user_name_ = jsonDecode(response.body)['name']; //

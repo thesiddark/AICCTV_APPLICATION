@@ -99,10 +99,16 @@ class _MyUsersignupPageState extends State<MyUsersignupPage> {
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(
+                child: TextFormField(
                   controller: namecontroller,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'name'),
+                      border: OutlineInputBorder(), hintText: 'Name'),
+                  validator: (v){
+                    if(v!.isEmpty){
+                      return 'Must enter your Name';
+                    }
+                    return null;
+                  },
                 ),
               ),
               SizedBox(

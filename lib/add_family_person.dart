@@ -21,12 +21,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Add Family',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyAddFamilyPerson(title: 'Flutter Demo Home Page'),
+      home: const MyAddFamilyPerson(title: 'Add Family'),
     );
   }
 }
@@ -45,8 +45,8 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
   TextEditingController Emailcontroller = TextEditingController();
   TextEditingController Phonecontroller = TextEditingController();
   TextEditingController placecontroller = TextEditingController();
-
   TextEditingController relationcontroller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,9 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
+          child:Form(
+            key: _formKey,
+            child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
@@ -80,8 +82,8 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
                       child: Column(
                         children: [
                           // Image(
-                          Image.network(
-                            "https://previews.123rf.com/images/faysalfarhan/faysalfarhan1710/faysalfarhan171019745/89052310-t%C3%A9l%C3%A9charger-l-ic%C3%B4ne-du-document-isol%C3%A9-sur-le-bouton-sp%C3%A9cial-vert-abstrait-illustration.jpg",
+                          Image.asset(
+                            'assets/images/profileselect.png',
                             height: 200,
                             width: 200,
                           ),
@@ -95,10 +97,16 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty){
+                      return 'Please Enter Name';
+                    }
+                    return null;
+                  },
                   controller: namecontroller,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'name'),
+                      border: OutlineInputBorder(), hintText: 'Name'),
                 ),
               ),
               SizedBox(
@@ -106,7 +114,15 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value)) {
+                      return 'Enter a valid Email!';
+                    }
+                    return null;
+                  },
                   controller: Emailcontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Email'),
@@ -117,7 +133,15 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty ||
+                        !RegExp(r"^[6789]\d{9}$")
+                            .hasMatch(v)) {
+                      return 'Enter valid number';
+                    }
+                    return null;
+                  },
                   controller: Phonecontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Phone'),
@@ -128,7 +152,13 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty){
+                      return 'Must enter valid Place';
+                    }
+                    return null;
+                  },
                   controller: placecontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'place'),
@@ -139,7 +169,13 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
               ),
               Padding(
                 padding: EdgeInsets.all(5),
-                child: TextField(
+                child: TextFormField(
+                  validator: (v){
+                    if(v!.isEmpty){
+                      return 'Must enter Relation';
+                    }
+                    return null;
+                  },
                   controller: relationcontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(), hintText: 'Relation'),
@@ -150,15 +186,21 @@ class _MyAddFamilyPersonState extends State<MyAddFamilyPerson> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  senddata();
+                  if (_formKey.currentState!.validate()) {
+                    if (_selectedImage == null) {
+                      Fluttertoast.showToast(msg: 'Please select an image');
+                    } else {
+                      senddata();
+                    }
+                  }
                 },
-                child: Text('Add'),
+                child: Text('ADD'),
               )
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 
   void senddata() async {

@@ -21,12 +21,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Complaints',
+      title: 'Edit Family',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyEditFamilyPerson(title: 'complaints'),
+      home: const MyEditFamilyPerson(title: 'Edit Family'),
     );
   }
 }
@@ -111,7 +111,7 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color.fromARGB(240, 110, 132, 147),
+        backgroundColor: Color.fromARGB(240, 253, 255, 255),
 
         // appBar: AppBar(
         //
@@ -125,7 +125,7 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
             decoration:  BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage('photos'), fit: BoxFit.cover),
-                  borderRadius: BorderRadius.circular(20.0),
+                  borderRadius: BorderRadius.circular(30.0),
             ),
             child: Center(
               child: Form(
@@ -133,6 +133,7 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(height: 100,),
                     if (_selectedImage != null) ...{
                       InkWell(
                         child: Image.file(
@@ -149,12 +150,15 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                         onTap: _checkPermissionAndChooseImage,
                         child: Column(
                           children: [
-                            Image(
-                              image: NetworkImage(photos),
-                              height: 200,
-                              width: 200,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10), // Adjust the radius as needed
+                              child: Image(
+                                image: NetworkImage(photos),
+                                height: 200,
+                                width: 200,
+                              ),
                             ),
-                            Text('Select Image',
+                            Text('Edit Photo',
                                 style: TextStyle(color: Colors.cyan))
                           ],
                         ),
@@ -163,7 +167,12 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: TextFormField(
-                        validator: (value) => Validatecomplaints(value!),
+                        validator: (v){
+                          if(v!.isEmpty){
+                            return 'Please Enter Name';
+                          }
+                          return null;
+                        },
                         controller: namecontroller,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -176,7 +185,12 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: TextFormField(
-                        validator: (value) => Validatecomplaints(value!),
+                        validator: (v){
+                          if(v!.isEmpty){
+                            return 'Must enter Relation';
+                          }
+                          return null;
+                        },
                         controller: relationcontroller,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -189,7 +203,12 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: TextFormField(
-                        validator: (value) => Validatecomplaints(value!),
+                        validator: (v){
+                          if(v!.isEmpty){
+                            return 'Must enter valid Place';
+                          }
+                          return null;
+                        },
                         controller: placecontroller,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -202,7 +221,14 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: TextFormField(
-                        validator: (value) => Validatecomplaints(value!),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(value)) {
+                            return 'Enter a valid Email!';
+                          }
+                          return null;
+                        },
                         controller: Emailcontroller,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -218,12 +244,10 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                         // validator: (value) => Validatecomplaints(value!),
                         validator: (v){
                           if(v!.isEmpty ||
-                              !RegExp(r"^[6789][0-9]{9}")
+                              !RegExp(r"^[6789]\d{9}$")
                                   .hasMatch(v)) {
-
-                            return 'enter valid number';
+                            return 'Enter valid number';
                           }
-
                           return null;
                         },
 
@@ -239,15 +263,13 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             sendata();
                           }
                         },
-                        child: Text('send'))
+                        child: Text('UPDATE'))
                   ],
                 ),
               ),
@@ -285,7 +307,7 @@ class _MyEditFamilyPersonState extends State<MyEditFamilyPerson> {
         String status = jsonDecode(response.body)['status'];
         print(status);
         if (status == 'ok') {
-          Fluttertoast.showToast(msg: ' Updated Service Successfully ');
+          Fluttertoast.showToast(msg: ' Updated  Successfully ');
 
           Navigator.push(
               context,

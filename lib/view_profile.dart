@@ -195,11 +195,11 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
                               width: 20,
                             ),
                             Text(
-                              'Profile Information:',
+                              'PROFILE',
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15.0,
+                                fontSize: 25.0,
                                 color: Colors.white,
                               ),
                             ),
@@ -399,7 +399,7 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
           Fluttertoast.showToast(msg: 'Not Found');
         }
       } else {
-        Fluttertoast.showToast(msg: 'Network Error');
+        Fluttertoast.showToast(msg: 'Network Error.Please try again');
       }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());

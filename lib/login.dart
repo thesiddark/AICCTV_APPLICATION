@@ -122,7 +122,7 @@ class _LoginState extends State<LoginNewPage> {
                     onEditingComplete: () => _focusNodePassword.requestFocus(),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter username.";
+                        return "Please Enter Username.";
                       }
 
                       return null;
@@ -155,7 +155,7 @@ class _LoginState extends State<LoginNewPage> {
                     ),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter password.";
+                        return "Please Enter Password.";
                       }
 
                       return null;
@@ -204,7 +204,7 @@ class _LoginState extends State<LoginNewPage> {
                                       ),
                                 ));
                           },
-                          child: Text('Are Quest? Please click here'))
+                          child: Text('Public? Please click here'))
                     ],
                   ),
                 ],
@@ -264,7 +264,7 @@ class _LoginState extends State<LoginNewPage> {
       Fluttertoast.showToast(msg: e.toString());
     }
   }
-
+/* validation already done on text -sid
   String? validateUsername(String value) {
     if (value.isEmpty) {
       return 'Please enter a User Name';
@@ -278,4 +278,6 @@ class _LoginState extends State<LoginNewPage> {
     }
     return null;
   }
+  */
+
 }
