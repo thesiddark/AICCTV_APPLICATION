@@ -2,6 +2,7 @@ import 'package:aicctv/public/public_home.dart';
 import 'package:aicctv/screens/Home.dart';
 import 'package:aicctv/signup.dart';
 import 'package:aicctv/signupnew.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -50,6 +51,7 @@ class _LoginState extends State<LoginNewPage> {
     // _controllerUsername.text = "authority@gmail.com";
     // _controllerPassword.text = "4149";
   }
+  DateTime? _lastPressedAt;
 
   final FocusNode _focusNodePassword = FocusNode();
   final TextEditingController _controllerUsername = TextEditingController();
@@ -62,13 +64,22 @@ class _LoginState extends State<LoginNewPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Home(),
-            ));
-
-        return false;
+        if (_lastPressedAt == null ||
+            DateTime.now().difference(_lastPressedAt!) > Duration(seconds: 2)) {
+          _lastPressedAt = DateTime.now();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Press back again to exit'),
+              duration: Duration(seconds: 2),
+              backgroundColor: Colors.transparent,
+            ),
+          );
+          return false;
+        } else {
+          // Close the app when double back pressed
+          SystemNavigator.pop();
+          return true;
+        }
       },
       child: Scaffold(
         backgroundColor: Colors.white,

@@ -103,7 +103,12 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  WillPopScope(
+        onWillPop: () async {
+      Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Home(),));
+      return true;
+    },
+    child: Scaffold(
       backgroundColor: Color.fromARGB(255, 228, 213, 231),
       appBar: AppBar(
         centerTitle: true,
@@ -372,7 +377,8 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
           ],
         ),
       ),
-    );
+    ),
+        );
   }
 
   void get_data() async {

@@ -72,7 +72,7 @@ class _MyIpPageState extends State<MyIpPage> {
                   padding: EdgeInsets.all(10),
                   child: TextFormField(
                     controller: ipcontroller,
-                    validator: (value) => Validateip(value!),
+                    validator: (value) => validateIP(value!),
                     decoration: InputDecoration(
                         hintText: 'IP Address',
                         fillColor: Colors.white,
@@ -117,9 +117,15 @@ class _MyIpPageState extends State<MyIpPage> {
   }
 }
 
-String? Validateip(String value) {
+String? validateIP(String value) {
+  // Regular expression for validating an IP address
+  final RegExp regExp = RegExp(
+      r'^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$');
+
   if (value.isEmpty) {
-    return 'please enter  ip address';
+    return 'Please enter an IP address';
+  } else if (!regExp.hasMatch(value)) {
+    return 'Please enter a valid IP address';
   }
   return null;
 }

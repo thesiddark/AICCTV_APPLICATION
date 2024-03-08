@@ -106,6 +106,7 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Home(),));
         return true;
       },
       child: Scaffold(

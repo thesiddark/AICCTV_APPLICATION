@@ -71,7 +71,33 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+          bool confirm = await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Confirm Exit'),
+              content: Text('Are you sure you want to exit'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  child: Text('No'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  child: Text('Yes'),
+                ),
+              ],
+            ),
+          );
+          // Return true if you want to allow back navigation, false otherwise
+          return confirm ?? false;
+        },
+     child:  Scaffold(
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -373,7 +399,7 @@ class _HomeState extends State<Home> {
                       width: 400,
                       decoration: const BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('/assets/images/akfor.png'),
+                              image: AssetImage('assets/images/akfor.png'),
                               fit: BoxFit.fill)),
                     ),
                   )),
@@ -454,6 +480,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+    )
     );
   }
 

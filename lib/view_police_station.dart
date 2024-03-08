@@ -110,6 +110,7 @@ class _ViewPoliceStationState extends State<ViewPoliceStation> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Home(),));
         return true;
       },
       child: Scaffold(
