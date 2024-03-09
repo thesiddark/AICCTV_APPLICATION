@@ -61,7 +61,7 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/cat.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/images/akfor.png'), fit: BoxFit.cover),
         ),
         child: GridView(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

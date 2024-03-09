@@ -1,5 +1,7 @@
+import 'package:aicctv/public/viewdetectedcriminals.dart';
 import 'package:aicctv/screens/Home.dart';
 import 'package:aicctv/sent_complaint.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:aicctv/widgets/text_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -8,6 +10,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:aicctv/send%20rating.dart';
+import '../user_changepassword.dart';
+import '../viewcomplaint.dart';
 
 void main() {
   runApp(const ViewReply());
@@ -248,7 +253,56 @@ class _ViewReplyPageState extends State<ViewReplyPage> {
           child: Icon(Icons.add,size: 50,),
           backgroundColor: Colors.blue,
         ),
+        bottomNavigationBar: MyCurvedNavigationBar(
+          currentIndex: 2, // Set the initial index of the selected item
+          onTap:(value) {
+
+            if (value == 0) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ));
+            }
+
+            if (value == 1) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ViewDetectedCriminals(),
+                  ));
+            }
+
+            if (value == 2) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ViewReplyPage(
+                      title: "My complaints",
+                    ),
+                  ));
+            }
+            if (value == 3) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SendRating(
+                      title: '',
+                    ),
+                  ));
+            }
+            if (value == 4) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyUserChangePassword(),
+                  ));
+            }
+          },
+
+        ),
       ),
+
     );
   }
 }

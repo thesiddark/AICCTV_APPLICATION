@@ -1,11 +1,16 @@
 import 'dart:convert';
 
+import 'package:aicctv/screens/Home.dart';
 import 'package:aicctv/send%20rating.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:aicctv/send%20rating.dart';
+import '../user_changepassword.dart';
+import '../viewcomplaint.dart';
 
 void main() {
   runApp(const MyApp());
@@ -93,6 +98,48 @@ class _View_RatingState extends State<View_Rating> {
                 builder: (context) => SendRating(title: ''),
               ));
         },
+      ),
+      bottomNavigationBar: MyCurvedNavigationBar(
+        currentIndex: 3, // Set the initial index of the selected item
+        onTap:(value) {
+
+          if (value == 0) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Home(),
+                ));
+          }
+
+          if (value == 1) {}
+
+          if (value == 2) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ViewReplyPage(
+                    title: "My complaints",
+                  ),
+                ));
+          }
+          if (value == 3) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SendRating(
+                    title: '',
+                  ),
+                ));
+          }
+          if (value == 4) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyUserChangePassword(),
+                ));
+          }
+        },
+
       ),
     );
   }

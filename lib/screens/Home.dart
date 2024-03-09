@@ -25,12 +25,8 @@ import '../sent_complaint.dart';
 
 // import '../user_add_staff.dart';
 import '../user_changepassword.dart';
-
-// import '../user_search_face.dart';
-// import '../view_prof_new.dart';
-// import '../view_staffs.dart';
-// import '../view_timeline.dart';
 import '../viewcomplaint.dart';
+import '../widgets/BottomNavigation.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -45,6 +41,8 @@ class _HomeState extends State<Home> {
 
   String user_name_ = "";
   String user_photo_ = "";
+
+
 
   @override
   void initState() {
@@ -403,79 +401,60 @@ class _HomeState extends State<Home> {
                               fit: BoxFit.fill)),
                     ),
                   )),
-              doctorList(),
+              dList(),
+
               Align(
-                  alignment: Alignment.bottomCenter,
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 400),
-                    opacity: opacity,
-                    child: CurvedNavigationBar(
-                        onTap: (value) {
-                          if (value == 0) {}
+                alignment: Alignment.bottomCenter,
+                child: AnimatedOpacity(
+                  duration: const Duration(milliseconds: 400),
+                  opacity: opacity,
+                  child: MyCurvedNavigationBar(
+                    currentIndex: 0,
+                    onTap:(value) {
+                        if (value == 0) {}
 
-                          if (value == 1) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ViewDetectedCriminals(),
-                                ));
-                          }
+                        if (value == 1) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ViewDetectedCriminals(),
+                              ));
+                        }
 
-                          if (value == 2) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ViewReplyPage(
-                                    title: "My complaints",
-                                  ),
-                                ));
-                          }
-                          if (value == 3) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SendRating(
-                                    title: '',
-                                  ),
-                                ));
-                          }
-                          if (value == 4) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyUserChangePassword(),
-                                ));
-                          }
-                        },
-                        backgroundColor: Colors.white,
-                        items: const [
-                          Icon(
-                            Icons.home_filled,
-                            color: Colors.blue,
-                            size: 30,
-                          ),
-                          Icon(
-                            Icons.dangerous,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                          Icon(
-                            Icons.feedback,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                          Icon(
-                            Icons.settings,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                        ]),
-                  ))
+                        if (value == 2) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ViewReplyPage(
+                                  title: "My complaints",
+                                ),
+                              ));
+                        }
+                        if (value == 3) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SendRating(
+                                  title: '',
+                                ),
+                              ));
+                        }
+                        if (value == 4) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MyUserChangePassword(),
+                              ));
+                        }
+                      },
+
+                      // Handle navigation logic here
+                      // You can access the index of the tapped item using the 'index' parameter
+                      // Update the currentIndex if needed
+
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -515,7 +494,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  AnimatedPositioned doctorList() {
+  AnimatedPositioned dList() {
     return AnimatedPositioned(
         top: position ? 460 : 550,
         left: 20,
@@ -526,69 +505,7 @@ class _HomeState extends State<Home> {
         ));
   }
 
-  Widget doctorCard(String name, String specialist, NetworkImage image) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: SizedBox(
-        height: 120,
-        width: double.infinity,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 10,
-            ),
-            CircleAvatar(
-              radius: 30,
-              backgroundImage: image,
-              backgroundColor: Colors.blue,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextWidget(
-                  name,
-                  20,
-                  Colors.black,
-                  FontWeight.bold,
-                  letterSpace: 0,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextWidget(
-                  specialist,
-                  17,
-                  Colors.black,
-                  FontWeight.bold,
-                  letterSpace: 0,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                // const Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Icon(Icons.star,color: Colors.orangeAccent,),
-                //     Icon(Icons.star,color: Colors.orangeAccent,),
-                //     Icon(Icons.star,color: Colors.orangeAccent,),
-                //     Icon(Icons.star,color: Colors.orangeAccent,),
-                //     Icon(Icons.star,color: Colors.orangeAccent,),
-                //   ],
-                // ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget categoryRow() {
     return AnimatedPositioned(
