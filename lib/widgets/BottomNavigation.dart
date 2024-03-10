@@ -39,6 +39,11 @@ class MyCurvedNavigationBar extends StatelessWidget {
                 size: 30,
               ),
               Icon(
+                Icons.security,
+                color: Colors.white,
+                size: 30,
+              ),
+              Icon(
                 Icons.feedback_outlined,
                 color: Colors.white,
                 size: 30,
@@ -53,6 +58,7 @@ class MyCurvedNavigationBar extends StatelessWidget {
                 color: Colors.white,
                 size: 30,
               ),
+
             ],
             index: currentIndex,
           ),

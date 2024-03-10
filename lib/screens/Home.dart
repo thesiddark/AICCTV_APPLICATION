@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:aicctv/public/viewdetectedcriminals.dart';
+
 import 'package:aicctv/send%20rating.dart';
 import 'package:aicctv/view_criminals.dart';
 import 'package:aicctv/view_family_person.dart';
@@ -21,11 +21,14 @@ import 'package:lottie/lottie.dart';
 
 // import '../ip.dart';
 // import '../courses.dart';
+import '../view_criminals.dart';
 import '../sent_complaint.dart';
 
 // import '../user_add_staff.dart';
 import '../user_changepassword.dart';
 import '../viewcomplaint.dart';
+import '../viewdetectedcriminals.dart';
+import '../viewdetectedun.dart';
 import '../widgets/BottomNavigation.dart';
 
 class Home extends StatefulWidget {
@@ -420,8 +423,14 @@ class _HomeState extends State<Home> {
                                 builder: (context) => ViewDetectedCriminals(),
                               ));
                         }
-
                         if (value == 2) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ViewDetectedUnkown(),
+                              ));
+                        }
+                        if (value == 3) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -430,7 +439,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ));
                         }
-                        if (value == 3) {
+                        if (value == 4) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -439,7 +448,7 @@ class _HomeState extends State<Home> {
                                 ),
                               ));
                         }
-                        if (value == 4) {
+                        if (value == 5) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(

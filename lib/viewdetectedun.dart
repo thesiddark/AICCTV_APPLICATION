@@ -14,37 +14,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'constants.dart';
 
 void main() {
-  runApp(const ViewDetectedCriminals());
+  runApp(const ViewDetectedUnkown());
 }
 
-class ViewDetectedCriminals extends StatelessWidget {
-  const ViewDetectedCriminals({super.key});
+class ViewDetectedUnkown extends StatelessWidget {
+  const ViewDetectedUnkown({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'View Detected Criminals',
+      title: 'View Detected Unknown',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const ViewDetectedCriminalsPage(title: 'View Detected Criminals'),
+      home: const ViewDetectedUnkownPage(title: 'View Detected Unknown'),
     );
   }
 }
 
-class ViewDetectedCriminalsPage extends StatefulWidget {
-  const ViewDetectedCriminalsPage({super.key, required this.title});
+class ViewDetectedUnkownPage extends StatefulWidget {
+  const ViewDetectedUnkownPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<ViewDetectedCriminalsPage> createState() => _ViewDetectedCriminalsPageState();
+  State<ViewDetectedUnkownPage> createState() => _ViewDetectedUnkownPageState();
 }
 
-class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
-  _ViewDetectedCriminalsPageState() {
-    ViewDetectedCriminals();
+class _ViewDetectedUnkownPageState extends State<ViewDetectedUnkownPage> {
+  _ViewDetectedUnkownPageState() {
+    ViewDetectedUnknown();
+
   }
 
   List<String> id_ = <String>[];
@@ -53,7 +54,7 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
   List<String> date_ = <String>[];
   List<String> time_ = <String>[];
 
-  Future<void> ViewDetectedCriminals() async {
+  Future<void> ViewDetectedUnknown() async {
     List<String> id = <String>[];
     List<String> photo = <String>[];
     List<String> cname = <String>[];
@@ -65,7 +66,8 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
       String urls = sh.getString('url').toString();
       String pid = sh.getString('did').toString();
       String lid = sh.getString('lid').toString();
-      String url = '$urls/View_Detected_Criminal/';
+      String url = '$urls/View_Detected_Unknown/';
+
 
       var data = await http.post(Uri.parse(url), body: {
         'lid': lid
@@ -99,7 +101,7 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
     }
   }
 
-  Future<void> ViewDetectedCriminalssearch() async {
+  Future<void> ViewDetectedUnkownsearch() async {
     List<String> id = <String>[];
     List<String> photo = <String>[];
     List<String> cname = <String>[];
@@ -110,7 +112,7 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
       SharedPreferences sh = await SharedPreferences.getInstance();
       String urls = sh.getString('url').toString();
       String pid = sh.getString('did').toString();
-      String url = '$urls/View_Detected_Criminal_search/';
+      String url = '$urls/View_Detected_Unknown_search/';
 
       var data = await http
           .post(Uri.parse(url), body: {'search': sh.getString("date")});
@@ -180,7 +182,7 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
                   ),
                 ),
                 Text(
-                  'Criminal Detectected',
+                  'Detected unknown',
                   style: GoogleFonts.poppins(
                     color: kDarkGreenColor,
                     fontSize: 22.0,
@@ -208,7 +210,7 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
                         print('Selected Date: ${formattedDate}');
                         final sh = await SharedPreferences.getInstance();
                         sh.setString("date", formattedDate);
-                        ViewDetectedCriminalssearch();
+                        ViewDetectedUnkown();
 
                         Fluttertoast.showToast(msg: '${formattedDate}');
                         // You can perform actions with the selected date here
