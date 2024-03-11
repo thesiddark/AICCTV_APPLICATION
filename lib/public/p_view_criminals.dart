@@ -53,6 +53,8 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
   List<String> pin_ = <String>[];
   List<String> dist_ = <String>[];
   List<String> photo_ = <String>[];
+  List<String> station_ = <String>[];
+  List<String> phno_ = <String>[];
 
   Future<void> ViewOwnPost() async {
     List<String> id = <String>[];
@@ -60,10 +62,12 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
     List<String> place = <String>[];
     List<String> post = <String>[];
     List<String> pin = <String>[];
-    List<String> dist = <String>[];
+    List<String> station = <String>[];
     List<String> details = <String>[];
     List<String> gender = <String>[];
     List<String> photo = <String>[];
+    List<String> phno = <String>[];
+
     try {
       SharedPreferences sh = await SharedPreferences.getInstance();
       String urls = sh.getString('url').toString();
@@ -77,10 +81,10 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
       for (int i = 0; i < arr.length; i++) {
         id.add(arr[i]['id'].toString());
         name.add(arr[i]['name']);
-
+        phno.add(arr[i]['phno'].toString());
         place.add(arr[i]['place']);
         gender.add(arr[i]['gender']);
-
+        station.add(arr[i]['station']);
         details.add(arr[i]['details']);
         photo.add(sh.getString("img_url").toString() + arr[i]['photo']);
       }
@@ -91,7 +95,8 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
         gender_ = gender;
         // post_ = post;
         // pin_ = pin;
-        // dist_ = dist;
+        phno_ = phno;
+        station_=station;
         details_ = details;
         photo_ = photo;
       });
@@ -184,6 +189,17 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
                           padding: EdgeInsets.all(5),
                           child: Text(
                             "Place:   " + place_[index],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Text(
+                            "Station:   " + station_[index] +"\nContact no: "+ phno_[index],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15.0,

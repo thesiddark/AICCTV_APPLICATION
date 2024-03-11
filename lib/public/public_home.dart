@@ -1,4 +1,5 @@
 import 'package:aicctv/public/p_view_criminals.dart';
+import 'package:aicctv/public/publicreport.dart';
 import 'package:aicctv/public/publicviewdetectedcriminals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,12 +57,12 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
           ),
         ],
         backgroundColor: Color.fromARGB(250, 30, 90, 105),
-        title: Text(widget.title),
+        title: Text("PUBLIC SERVICE"),
       ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/akfor.png'), fit: BoxFit.cover,opacity: 0.1),
+              image: AssetImage('assets/images/akfor.png'), fit: BoxFit.cover,opacity: 0.2),
         ),
         child: GridView(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -117,6 +118,43 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
                   SizedBox(height: 5.0),
                   InkWell(
                     child: CircleAvatar(
+                        radius: 50,backgroundColor: Colors.white,
+                        backgroundImage: AssetImage("assets/images/face-detection.png")),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PublicViewDetectedCriminalsPage(
+                          title: '',
+                          )));
+                    },
+                  ),
+                  SizedBox(height: 5.0),
+                  // CircleAvatar(radius: 50,backgroundImage: NetworkImage(photo_[index])),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Text("Detected Criminals",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ],
+                  ),
+                ])),
+
+            Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(207, 28, 62, 100),
+                    borderRadius: BorderRadius.circular(15)),
+                child: Column(children: [
+                  SizedBox(height: 5.0),
+                  InkWell(
+                    child: CircleAvatar(
                         radius: 50,
                         backgroundImage: NetworkImage(
                             'https://t4.ftcdn.net/jpg/04/59/11/63/240_F_459116369_eG4lArF5CWbXCjgQlbugFcbaz4eXgSAs.jpg')),
@@ -125,7 +163,7 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                PublicViewDetectedCriminalsPage(
+                                publicreport(
                               title: '',
                             ),
                           ));
@@ -138,6 +176,43 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
                       Padding(
                         padding: EdgeInsets.all(1),
                         child: Text("Send Report",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+
+                    ],
+                  ),
+                ])),
+            Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(207, 28, 62, 100),
+                    borderRadius: BorderRadius.circular(15)),
+                child: Column(children: [
+                  SizedBox(height: 5.0),
+                  InkWell(
+                    child: CircleAvatar(
+                        radius: 50,backgroundColor: Colors.white,
+                        backgroundImage: AssetImage("assets/images/emergency-call.png")),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PublicViewDetectedCriminalsPage(
+                                title: '',
+                              )));
+                    },
+                  ),
+                  SizedBox(height: 5.0),
+                  // CircleAvatar(radius: 50,backgroundImage: NetworkImage(photo_[index])),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Text("Emergency Call",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,

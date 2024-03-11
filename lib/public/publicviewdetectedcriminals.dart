@@ -1,35 +1,42 @@
-import 'package:aicctv/constants.dart';
+import 'package:aicctv/public/public_home.dart';
 import 'package:aicctv/screens/Home.dart';
+import 'package:aicctv/user_changepassword.dart';
+import 'package:aicctv/viewcomplaint.dart';
+import 'package:aicctv/viewdetectedun.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
+
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 // import 'package:intl/intl.dart';
 // import 'package:readmore/readmore.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// import 'constants.dart';
+import '../constants.dart';
+
 
 void main() {
-  runApp(const ViewDetectedCriminals());
+  runApp(const PublicViewDetectedCriminals());
 }
 
-class ViewDetectedCriminals extends StatelessWidget {
-  const ViewDetectedCriminals({super.key});
+class PublicViewDetectedCriminals extends StatelessWidget {
+  const PublicViewDetectedCriminals({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'View Detected Criminals',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const PublicViewDetectedCriminalsPage(
-          title: 'View Detected Criminals'),
+      home: const PublicViewDetectedCriminalsPage(title: 'View Detected Criminals'),
     );
   }
 }
@@ -40,14 +47,12 @@ class PublicViewDetectedCriminalsPage extends StatefulWidget {
   final String title;
 
   @override
-  State<PublicViewDetectedCriminalsPage> createState() =>
-      _PublicViewDetectedCriminalsPageState();
+  State<PublicViewDetectedCriminalsPage> createState() => _PublicViewDetectedCriminalsPageState();
 }
 
-class _PublicViewDetectedCriminalsPageState
-    extends State<PublicViewDetectedCriminalsPage> {
+class _PublicViewDetectedCriminalsPageState extends State<PublicViewDetectedCriminalsPage> {
   _PublicViewDetectedCriminalsPageState() {
-    ViewDetectedCriminals();
+    PublicViewDetectedCriminals();
   }
 
   List<String> id_ = <String>[];
@@ -55,24 +60,28 @@ class _PublicViewDetectedCriminalsPageState
   List<String> cname_ = <String>[];
   List<String> date_ = <String>[];
   List<String> time_ = <String>[];
+  List<String> place_ = <String>[];
 
-  Future<void> ViewDetectedCriminals() async {
+  Future<void> PublicViewDetectedCriminals() async {
     List<String> id = <String>[];
     List<String> photo = <String>[];
     List<String> cname = <String>[];
     List<String> date = <String>[];
     List<String> time = <String>[];
+    List<String> place = <String>[];
 
     try {
       SharedPreferences sh = await SharedPreferences.getInstance();
       String urls = sh.getString('url').toString();
       String pid = sh.getString('did').toString();
+      String lid = sh.getString('lid').toString();
       String url = '$urls/View_Detected_Criminal/';
 
-      var data = await http.post(Uri.parse(url), body: {'pid': pid});
+      var data = await http.post(Uri.parse(url), body: {
+        'lid': lid
+      });
       var jsondata = json.decode(data.body);
       String statuss = jsondata['status'];
-
       var arr = jsondata["data"];
 
       print(arr.length);
@@ -80,9 +89,10 @@ class _PublicViewDetectedCriminalsPageState
       for (int i = 0; i < arr.length; i++) {
         id.add(arr[i]['id'].toString());
         photo.add(sh.getString("img_url").toString() + arr[i]['photo']);
-        cname.add(arr[i]['cname']);
-        date.add(arr[i]['date']);
+        cname.add(arr[i]['name']);
+        date.add(arr[i]['date'].toString());
         time.add(arr[i]['time']);
+        place.add(arr[i]['place']);
       }
 
       setState(() {
@@ -91,6 +101,7 @@ class _PublicViewDetectedCriminalsPageState
         cname_ = cname;
         date_ = date;
         time_ = time;
+        place_ = place;
       });
 
       print(statuss);
@@ -100,12 +111,13 @@ class _PublicViewDetectedCriminalsPageState
     }
   }
 
-  Future<void> ViewDetectedCriminalssearch() async {
+  Future<void> PublicViewDetectedCriminalssearch() async {
     List<String> id = <String>[];
     List<String> photo = <String>[];
     List<String> cname = <String>[];
     List<String> date = <String>[];
     List<String> time = <String>[];
+    List<String> place = <String>[];
 
     try {
       SharedPreferences sh = await SharedPreferences.getInstance();
@@ -124,10 +136,11 @@ class _PublicViewDetectedCriminalsPageState
 
       for (int i = 0; i < arr.length; i++) {
         id.add(arr[i]['id'].toString());
-        photo.add(urls + arr[i]['photo']);
-        cname.add(arr[i]['cname']);
-        date.add(arr[i]['date']);
-        time.add(arr[i]['time']);
+        photo.add(sh.getString("img_url").toString() + arr[i]['photo'].toString());
+        cname.add(arr[i]['name'].toString());
+        date.add(arr[i]['date'].toString());
+        time.add(arr[i]['time'].toString());
+        place.add(arr[i]['place']);
       }
 
       setState(() {
@@ -136,6 +149,7 @@ class _PublicViewDetectedCriminalsPageState
         cname_ = cname;
         date_ = date;
         time_ = time;
+        place_=place;
       });
 
       print(statuss);
@@ -148,13 +162,13 @@ class _PublicViewDetectedCriminalsPageState
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        return true;
-      },
-      child: Scaffold(
+        onWillPop: () async {
+          return true;
+        },
+        child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Color.fromARGB(250, 30, 90, 105),
+            backgroundColor: Colors.white,
             elevation: 0.0,
             leadingWidth: 0.0,
             title: Row(
@@ -168,7 +182,7 @@ class _PublicViewDetectedCriminalsPageState
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Home(),
+                          builder: (context) => PublicMyHomePage(title: 'title'),
                         ),
                       );
                     },
@@ -181,7 +195,7 @@ class _PublicViewDetectedCriminalsPageState
                   ),
                 ),
                 Text(
-                  'Detections',
+                  'Criminal Detectected',
                   style: GoogleFonts.poppins(
                     color: kDarkGreenColor,
                     fontSize: 22.0,
@@ -190,45 +204,45 @@ class _PublicViewDetectedCriminalsPageState
                 ),
                 SizedBox(
                   width: 40.0,
-                  // child: IconButton(
-                  //   onPressed: () async {
-                  //     // Set an initial date
-                  //     DateTime initialDate = DateTime.now();
-                  //
-                  //     // Open a date picker with the initial date
-                  //     DateTime? pickedDate = await showDatePicker(
-                  //       context: context,
-                  //       initialDate: initialDate,
-                  //       firstDate: DateTime(1900),
-                  //       lastDate: DateTime.now(),
-                  //     );
-                  //
-                  //     // Handle the selected date as needed
-                  //     // if (pickedDate != null) {
-                  //     //   String formattedDate =
-                  //     //       // DateFormat('yyyy-MM-dd').format(pickedDate);
-                  //     //   // print('Selected Date: ${formattedDate}');
-                  //     //   final sh = await SharedPreferences.getInstance();
-                  //     //   sh.setString("date", formattedDate);
-                  //     //   ViewDetectedCriminalssearch();
-                  //     //
-                  //     //   Fluttertoast.showToast(msg: '${formattedDate}');
-                  //     //   // You can perform actions with the selected date here
-                  //     // }
-                  //   },
-                  //   splashRadius: 1.0,
-                  //   icon: Icon(
-                  //     Icons.calendar_month,
-                  //     color: Colors.black,
-                  //     size: 34.0,
-                  //   ),
-                  // ),
+                  child: IconButton(
+                    onPressed: () async {
+                      // Set an initial date
+                      DateTime initialDate = DateTime.now();
+
+                      // Open a date picker with the initial date
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: initialDate,
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
+
+                      if (pickedDate != null) {
+                        String formattedDate =
+                        DateFormat('yyyy-MM-dd').format(pickedDate);
+                        print('Selected Date: ${formattedDate}');
+                        final sh = await SharedPreferences.getInstance();
+                        sh.setString("date", formattedDate);
+                        PublicViewDetectedCriminalssearch();
+
+                        Fluttertoast.showToast(msg: '${formattedDate}');
+                        // You can perform actions with the selected date here
+                      }
+                    },
+                    splashRadius: 1.0,
+                    icon: Icon(
+                      Icons.calendar_month,
+                      color: Colors.black,
+                      size: 34.0,
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          body: a()),
-    );
+          body: a(),
+
+        ));
   }
 
   a() {
@@ -281,7 +295,7 @@ class _PublicViewDetectedCriminalsPageState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Criminal: " + cname_[index],
+                                    "" + cname_[index],
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -296,6 +310,11 @@ class _PublicViewDetectedCriminalsPageState
                                   SizedBox(height: 8),
                                   Text(
                                     "Time: " + time_[index],
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    "Place: \n" + place_[index],
                                     style: TextStyle(fontSize: 16),
                                   ),
                                 ],

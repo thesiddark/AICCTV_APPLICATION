@@ -57,6 +57,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  url_launcher: ^6.0.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -95,6 +96,9 @@ flutter:
     - assets/images/zone_person_urgent_FILL0_wght400_GRAD0_opsz24.png
     - assets/images/complaint.png
     - assets/images/settings.png
+    - assets/images/security.png
+    - assets/images/face-detection.png
+    - assets/images/emergency-call.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
