@@ -80,7 +80,7 @@ flutter:
   assets:
     - assets/images/profile.png
     - assets/images/police.png
-    - assets/images/family.jpg
+    - assets/images/family.png
     - assets/images/criminals.jpg
     - assets/images/camera.png
     - assets/aicctv.png
@@ -90,6 +90,11 @@ flutter:
     - assets/detective.json
     - assets/notification1.json
     - assets/images/akfor.png
+    - assets/images/star.png
+    - assets/images/fraud.png
+    - assets/images/zone_person_urgent_FILL0_wght400_GRAD0_opsz24.png
+    - assets/images/complaint.png
+    - assets/images/settings.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

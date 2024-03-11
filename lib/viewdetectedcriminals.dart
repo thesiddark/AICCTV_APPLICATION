@@ -1,7 +1,13 @@
 import 'package:aicctv/screens/Home.dart';
+import 'package:aicctv/user_changepassword.dart';
+import 'package:aicctv/viewcomplaint.dart';
+import 'package:aicctv/viewdetectedun.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+
 
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -225,10 +231,9 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
               ],
             ),
           ),
-          body: a()
+          body: a(),
 
-      ),
-    );
+    ));
   }
 
   a() {

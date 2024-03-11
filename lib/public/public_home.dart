@@ -1,5 +1,5 @@
 import 'package:aicctv/public/p_view_criminals.dart';
-import 'package:aicctv/public/viewdetectedcriminals.dart';
+import 'package:aicctv/public/publicviewdetectedcriminals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

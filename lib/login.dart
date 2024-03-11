@@ -2,6 +2,7 @@ import 'package:aicctv/public/public_home.dart';
 import 'package:aicctv/screens/Home.dart';
 import 'package:aicctv/signup.dart';
 import 'package:aicctv/signupnew.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter/material.dart';
@@ -258,12 +259,12 @@ class _LoginState extends State<LoginNewPage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Home(),
+                builder: (context) => Homenav(),
               ));
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Home(),
+                builder: (context) => Homenav(),
               ));
         } else {
           Fluttertoast.showToast(msg: 'Invalid username or password');

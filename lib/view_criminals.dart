@@ -2,6 +2,7 @@ import 'dart:convert';
 
 // import 'package:facetrack/parent/chat_with_authority.dart';
 import 'package:aicctv/screens/Home.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -106,7 +107,7 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Home(),));
+        Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Homenav(),));
         return true;
       },
       child: Scaffold(

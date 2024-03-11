@@ -44,7 +44,12 @@ class View_Rating extends StatefulWidget {
 class _View_RatingState extends State<View_Rating> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  WillPopScope(
+        onWillPop: () async {
+      Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Homenav(),));
+      return true;
+    },
+    child:Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
@@ -99,49 +104,7 @@ class _View_RatingState extends State<View_Rating> {
               ));
         },
       ),
-      bottomNavigationBar: MyCurvedNavigationBar(
-        currentIndex: 3, // Set the initial index of the selected item
-        onTap:(value) {
-
-          if (value == 0) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Home(),
-                ));
-          }
-
-          if (value == 1) {}
-
-          if (value == 2) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ViewReplyPage(
-                    title: "My complaints",
-                  ),
-                ));
-          }
-          if (value == 3) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SendRating(
-                    title: '',
-                  ),
-                ));
-          }
-          if (value == 4) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MyUserChangePassword(),
-                ));
-          }
-        },
-
-      ),
-    );
+    ));
   }
 
   @override

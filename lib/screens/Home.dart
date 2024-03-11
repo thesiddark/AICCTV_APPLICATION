@@ -12,7 +12,6 @@ import 'package:aicctv/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:aicctv/screens/SeeAll.dart';
 import 'package:aicctv/res/lists.dart';
 import 'package:aicctv/widgets/text_widget.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -45,7 +44,7 @@ class _HomeState extends State<Home> {
   String user_name_ = "";
   String user_photo_ = "";
 
-
+  final PageController _pageController = PageController();
 
   @override
   void initState() {
@@ -88,7 +87,11 @@ class _HomeState extends State<Home> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop(true);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginNewPage(),
+                        ));
                   },
                   child: Text('Yes'),
                 ),
@@ -362,108 +365,17 @@ class _HomeState extends State<Home> {
                             FontWeight.bold,
                             letterSpace: 0,
                           ),
-                          InkWell(
-                              onTap: () async {
-                                animator();
-                                setState(() {});
-                                // Timer(Duration(seconds: 1),() {
-                                //   Navigator.push(context, MaterialPageRoute(builder: (context) => SeeAll(),));
-                                //   animator();
-                                // },);
-                                await Future.delayed(
-                                    const Duration(milliseconds: 500));
-                                await Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) {
-                                    return SeeAll();
-                                  },
-                                ));
 
-                                setState(() {
-                                  animator();
-                                });
-                              },
-                              child: Text("")),
                           // TextWidget("See all", 15, Colors.blue.shade600.withOpacity(.8), FontWeight.bold,letterSpace: 0,)),
                         ],
                       ),
                     ),
                   )),
-              AnimatedPositioned(
-                  bottom: 1,
-                  left: position ? 50 : 150,
-                  duration: const Duration(milliseconds: 400),
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 400),
-                    opacity: opacity,
-                    child: Container(
-                      height: 450,
-                      width: 400,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/akfor.png'),
-                              fit: BoxFit.fill)),
-                    ),
-                  )),
+
+
               dList(),
 
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 400),
-                  opacity: opacity,
-                  child: MyCurvedNavigationBar(
-                    currentIndex: 0,
-                    onTap:(value) {
-                        if (value == 0) {}
 
-                        if (value == 1) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ViewDetectedCriminals(),
-                              ));
-                        }
-                        if (value == 2) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ViewDetectedUnkown(),
-                              ));
-                        }
-                        if (value == 3) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ViewReplyPage(
-                                  title: "My complaints",
-                                ),
-                              ));
-                        }
-                        if (value == 4) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SendRating(
-                                  title: '',
-                                ),
-                              ));
-                        }
-                        if (value == 5) {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MyUserChangePassword(),
-                              ));
-                        }
-                      },
-
-                      // Handle navigation logic here
-                      // You can access the index of the tapped item using the 'index' parameter
-                      // Update the currentIndex if needed
-
-                  ),
-                ),
-              )
             ],
           ),
         ),
@@ -531,14 +443,16 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 category("assets/images/profile.png", "Profile", 5),
-                category1("assets/images/family.jpg", "Family", 10),
+                category1("assets/images/family.png", "Family", 10),
                 category2("assets/images/criminals.jpg", "Criminals", 10),
                 category3("assets/images/police.png", "Police", 12),
+                category4("assets/images/star.png", "Feedback", 12)
               ],
             ),
           ),
         ));
   }
+
 
   Widget category(String asset, String txt, double padding) {
     return Column(
@@ -692,6 +606,50 @@ class _HomeState extends State<Home> {
           child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Container(
+              padding: EdgeInsets.all(padding),
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Image(
+                  image: AssetImage(asset),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        TextWidget(
+          txt,
+          16,
+          Colors.black,
+          FontWeight.bold,
+          letterSpace: 1,
+        ),
+      ],
+    );
+  }
+  Widget category4(String asset, String txt, double padding) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SendRating(title: ''),
+                ));
+          },
+          child: Card(
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: Container(
               padding: EdgeInsets.all(padding),
               height: 50,

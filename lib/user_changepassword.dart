@@ -156,7 +156,7 @@ class _LoginState extends State<MyUserChangePassword> {
                           submit();
                         }
                       },
-                      child: const Text("SUBMIT"),
+                      child: const Text("SUBMIT",),
                     ),
                   ],
                 ),
@@ -164,6 +164,7 @@ class _LoginState extends State<MyUserChangePassword> {
             ),
           ),
         ),
+
       ),
     );
   }
