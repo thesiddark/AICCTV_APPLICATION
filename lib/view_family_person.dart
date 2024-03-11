@@ -113,11 +113,11 @@ class _MyViewFamilyPersonState extends State<MyViewFamilyPerson> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Home()),
+                MaterialPageRoute(builder: (context) => Homenav()),
               );
             },
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Colors.white,
           title: Text("Family Members"),
         ),
         body: ListView.builder(

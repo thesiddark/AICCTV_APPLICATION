@@ -121,7 +121,7 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
               );
             },
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Color.fromARGB(250, 30, 90, 105),
           title: Text("Criminals"),
         ),
         body: ListView.builder(

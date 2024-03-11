@@ -44,7 +44,7 @@ dependencies:
   google_fonts:
   video_player: ^2.7.2
   carousel_slider: ^4.2.1
-  flutter_local_notifications: ^16.3.2
+  flutter_local_notifications: ^17.0.0
 
   lottie: ^3.0.0
 
@@ -63,7 +63,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

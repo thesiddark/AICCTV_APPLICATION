@@ -154,7 +154,7 @@ class _PublicViewDetectedCriminalsPageState
       child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.white,
+            backgroundColor: Color.fromARGB(250, 30, 90, 105),
             elevation: 0.0,
             leadingWidth: 0.0,
             title: Row(

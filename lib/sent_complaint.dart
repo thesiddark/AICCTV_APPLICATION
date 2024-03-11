@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:aicctv/screens/Home.dart';
 import 'package:aicctv/viewcomplaint.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -49,7 +50,7 @@ class _MyComplaintHomeState extends State<MyComplaintHome> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Home(),
+              builder: (context) => const Homenav(),
             ));
 
         return false;
@@ -136,8 +137,7 @@ class _MyComplaintHomeState extends State<MyComplaintHome> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ViewReplyPage(
-                  title: '',
+                builder: (context) => Homenav(
                 ),
               ));
         } else {

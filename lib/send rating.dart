@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:aicctv/screens/Home.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -42,7 +43,12 @@ class _SendRatingState extends State<SendRating> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+      Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Homenav()));
+      return true;
+    },
+    child:Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
@@ -94,7 +100,7 @@ class _SendRatingState extends State<SendRating> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   double ratings = 1;

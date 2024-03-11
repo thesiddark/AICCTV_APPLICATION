@@ -118,11 +118,11 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Home()),
+                MaterialPageRoute(builder: (context) => Homenav()),
               );
             },
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Colors.white,
           title: Text("Criminals"),
         ),
         body: ListView.builder(

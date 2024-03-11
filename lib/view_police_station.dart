@@ -121,12 +121,12 @@ class _ViewPoliceStationState extends State<ViewPoliceStation> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Home()),
+                MaterialPageRoute(builder: (context) => Homenav()),
               );
             },
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: Text("Authority"),
+          backgroundColor: Colors.white,
+          title: Text("Police "),
         ),
         body: ListView.builder(
           physics: BouncingScrollPhysics(),

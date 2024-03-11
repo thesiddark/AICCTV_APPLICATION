@@ -110,7 +110,7 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
       return true;
     },
     child: Scaffold(
-      backgroundColor: Color.fromARGB(255, 228, 213, 231),
+      backgroundColor: Color.fromARGB(250, 255, 255, 255),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,

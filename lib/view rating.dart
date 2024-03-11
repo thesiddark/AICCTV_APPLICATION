@@ -46,7 +46,7 @@ class _View_RatingState extends State<View_Rating> {
   Widget build(BuildContext context) {
     return  WillPopScope(
         onWillPop: () async {
-      Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Homenav(),));
+      Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Homenav()));
       return true;
     },
     child:Scaffold(
