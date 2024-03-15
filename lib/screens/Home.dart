@@ -109,6 +109,7 @@ class _HomeState extends State<Home> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
 
+
           child: Stack(
             children: [
               AnimatedPositioned(

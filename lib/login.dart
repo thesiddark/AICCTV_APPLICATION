@@ -93,7 +93,8 @@ class _LoginState extends State<LoginNewPage> {
             // color: Colors.white,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/loginpage.jpg"),
+                  image: AssetImage("assets/images/SL-120722-54400-35.jpg") ,
+                  opacity: 0.9,
                   fit: BoxFit.cover),
             ),
 

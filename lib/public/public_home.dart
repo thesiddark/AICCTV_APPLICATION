@@ -4,6 +4,11 @@ import 'package:aicctv/public/publicviewdetectedcriminals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:url_launcher/url_launcher.dart';
+
+
+
+
 import '../login.dart';
 
 void main() {
@@ -198,12 +203,7 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
                         radius: 50,backgroundColor: Colors.white,
                         backgroundImage: AssetImage("assets/images/emergency-call.png")),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PublicViewDetectedCriminalsPage(
-                                title: '',
-                              )));
+                      _makePhoneCall('1234567890');
                     },
                   ),
                   SizedBox(height: 5.0),
@@ -226,103 +226,14 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
         ),
       ),
 
-      // drawer: Drawer(
-      //   child: ListView(
-      //     padding: EdgeInsets.zero,
-      //     children: [
-      //       DrawerHeader(
-      //         decoration: BoxDecoration(
-      //           color:  Color.fromARGB(195, 29, 155, 187),
-      //
-      //
-      //         ),
-      //         child:
-      //         Column(children: [
-      //
-      //           Text(
-      //             'Nss Management',
-      //             style: TextStyle(fontSize: 20,color: Colors.grey[200]),
-      //           ),
-      //           // CircleAvatar(radius: 50,backgroundImage: AssetImage('assets/images/nss.jpeg')),
-      //
-      //
-      //
-      //
-      //         ])
-      //
-      //
-      //         ,
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.home),
-      //         title: const Text('Home'),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context, MaterialPageRoute(builder: (context) => PublicMyHomePage(title: "",),));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.event),
-      //         title: const Text(' Events '),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context, MaterialPageRoute(builder: (context) => StudentViewEvents(),));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.notifications_active),
-      //         title: const Text(" Join Notification "),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context, MaterialPageRoute(builder: (context) => StudentViewNotification(),));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.quickreply_sharp),
-      //         title: const Text(' Feedback '),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context, MaterialPageRoute(builder: (context) => MySendFeedback(title: " ",),));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.task_alt),
-      //         title: const Text(' Selection Task '),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context, MaterialPageRoute(builder: (context) => StudentViewSelectionTask(),));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.request_page),
-      //         title: const Text(' View Status '),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context, MaterialPageRoute(builder: (context) => StudentViewRequestStatus(),));
-      //         },
-      //       ),
-      //       ListTile(
-      //         leading: Icon(Icons.password),
-      //         title: const Text(' Change Password '),
-      //         onTap: () {
-      //           Navigator.pop(context);
-      //           Navigator.push(context, MaterialPageRoute(builder: (context) => MyStudentChangePassword(title: "",),));
-      //         },
-      //       ),
-      //
-      //
-      //       ListTile(
-      //         leading: Icon(Icons.logout),
-      //         title: const Text('LogOut'),
-      //         onTap: () {Navigator.push(context, MaterialPageRoute(
-      //           builder: (context) => LoginPage(title: ""),));
-      //
-      //           // Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
-      //         },
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
+  }
+}
+void _makePhoneCall(String phoneNumber) async {
+  final url = 'tel:$phoneNumber';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

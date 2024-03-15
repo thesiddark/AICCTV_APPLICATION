@@ -138,7 +138,7 @@ class _MySignupState extends State<MySignUp> {
             alignment: Alignment.center,
             fit: BoxFit.fitHeight,
             image: AssetImage(
-                'assets/images/cbc.jpg'), // Replace 'assets/your_image.png' with the actual asset image path
+    ' assets/images/cbc.jpg'), // Replace 'assets/your_image.png' with the actual asset image path
             // fit: BoxFit.cover, // You can adjust the fit property as needed
           ),
         ),

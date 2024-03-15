@@ -60,7 +60,7 @@ class _MyIpPageState extends State<MyIpPage> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/loginpage.jpg'), fit: BoxFit.cover),
+              image: AssetImage('assets/images/SL-120722-54400-35.jpg'), fit: BoxFit.cover),
         ),
         child: Form(
           key: _formKey,
@@ -72,6 +72,7 @@ class _MyIpPageState extends State<MyIpPage> {
                   padding: EdgeInsets.all(10),
                   child: TextFormField(
                     controller: ipcontroller,
+
                     validator: (value) => validateIP(value!),
                     decoration: InputDecoration(
                         hintText: 'IP Address',

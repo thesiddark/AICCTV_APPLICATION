@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const MyUsersignupPage(title: 'Flutter Demo Home Page'),
@@ -55,11 +55,14 @@ class _MyUsersignupPageState extends State<MyUsersignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: SingleChildScrollView(
+
+      body: Container(
+    decoration: const BoxDecoration(
+    image: DecorationImage(
+    image: AssetImage('assets/images/SL-120722-54400-35.jpg'), fit: BoxFit.cover,opacity: 0.7),
+    ),
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.all(32.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -84,11 +87,7 @@ class _MyUsersignupPageState extends State<MyUsersignupPage> {
                       child: Column(
                         children: [
                           // Image(
-                          Image.network(
-                            "https://previews.123rf.com/images/faysalfarhan/faysalfarhan1710/faysalfarhan171019745/89052310-t%C3%A9l%C3%A9charger-l-ic%C3%B4ne-du-document-isol%C3%A9-sur-le-bouton-sp%C3%A9cial-vert-abstrait-illustration.jpg",
-                            height: 200,
-                            width: 200,
-                          ),
+                          Image.asset("assets/images/profileselect.png",width: 150,height: 150,),
                           Text('Select Image',
                               style: TextStyle(color: Colors.red))
                         ],
@@ -212,7 +211,7 @@ class _MyUsersignupPageState extends State<MyUsersignupPage> {
                 child: TextField(
                   controller: placecontroller,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'place'),
+                      border: OutlineInputBorder(), hintText: 'Place'),
                 ),
               ),
               SizedBox(
@@ -245,7 +244,7 @@ class _MyUsersignupPageState extends State<MyUsersignupPage> {
                 child: TextField(
                   controller: districtcontroller,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'district'),
+                      border: OutlineInputBorder(), hintText: 'District'),
                 ),
               ),
               SizedBox(
@@ -268,23 +267,37 @@ class _MyUsersignupPageState extends State<MyUsersignupPage> {
                   controller: confirmpasswordcontroller,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Confirm password'),
+                      hintText: 'Confirm Password'),
                 ),
               ),
               SizedBox(
                 height: 20,
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue), // Change background color here
+                ),
                 onPressed: () {
                   senddata();
                 },
-                child: Text('Signup'),
+                child: Text(
+                  'signup',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    backgroundColor: Colors.blue
+                  ),
+                ),
               )
+              ,SizedBox(
+                height: 40,
+              ),
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 
   void senddata() async {
