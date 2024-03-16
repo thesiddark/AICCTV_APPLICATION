@@ -54,6 +54,7 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
   List<String> pin_ = <String>[];
   List<String> dist_ = <String>[];
   List<String> photo_ = <String>[];
+  List<String> threatlevel_ = <String>[];
 
   Future<void> ViewOwnPost() async {
     List<String> id = <String>[];
@@ -65,6 +66,7 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
     List<String> details = <String>[];
     List<String> gender = <String>[];
     List<String> photo = <String>[];
+    List<String> threatlevel = <String>[];
     try {
       SharedPreferences sh = await SharedPreferences.getInstance();
       String urls = sh.getString('url').toString();
@@ -81,7 +83,7 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
 
         place.add(arr[i]['place']);
         gender.add(arr[i]['gender']);
-
+        threatlevel.add(arr[i]['threatlevel']);
         details.add(arr[i]['details']);
         photo.add(sh.getString("img_url").toString() + arr[i]['photo']);
       }
@@ -90,7 +92,7 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
         name_ = name;
         place_ = place;
         gender_ = gender;
-        // post_ = post;
+        threatlevel_ = threatlevel;
         // pin_ = pin;
         // dist_ = dist;
         details_ = details;
@@ -203,6 +205,17 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Text(
+                            "Threat Level:   " + (index < threatlevel_.length ? threatlevel_[index] : "N/A"), // Check if index is within bounds
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: (index < threatlevel_.length ? getThreatColor(threatlevel_[index]) : Colors.black), // Use default color if index is out of bounds
+                            ),
+                          ),
+                        ),
                         // Padding(
                         //   padding: EdgeInsets.all(5),
                         //   child: Row(
@@ -225,5 +238,17 @@ class _UserViewCriminalsState extends State<UserViewCriminals> {
         ),
       ),
     );
+  }
+}
+Color getThreatColor(String threatLevel) {
+  switch (threatLevel) {
+    case 'HIGH':
+      return Colors.red;
+    case 'MODERATE':
+      return Colors.orange;
+    case 'LOW':
+      return Colors.green;
+    default:
+      return Colors.black; // Default color
   }
 }

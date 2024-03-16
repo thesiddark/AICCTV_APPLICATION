@@ -46,7 +46,12 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () async {
+      Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => LoginNewPage(),));
+      return true;
+    },
+    child: Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
@@ -104,7 +109,7 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
                     children: [
                       Padding(
                         padding: EdgeInsets.all(1),
-                        child: Text("Criminals",
+                        child: Text("Criminals \n(WANTED)",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -226,7 +231,7 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
         ),
       ),
 
-    );
+    ));
   }
 }
 void _makePhoneCall(String phoneNumber) async {

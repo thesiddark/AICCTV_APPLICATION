@@ -1,6 +1,5 @@
 import 'package:aicctv/public/public_home.dart';
-import 'package:aicctv/screens/Home.dart';
-import 'package:aicctv/signup.dart';
+
 import 'package:aicctv/signupnew.dart';
 import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/services.dart';
@@ -9,14 +8,11 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:flutter/material.dart';
 
-import 'main.dart';
-import 'main_ip.dart';
 
 void main() {
   runApp(const MainApp());

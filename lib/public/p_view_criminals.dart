@@ -55,6 +55,7 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
   List<String> photo_ = <String>[];
   List<String> station_ = <String>[];
   List<String> phno_ = <String>[];
+  List<String> threatlevel_ = <String>[];
 
   Future<void> ViewOwnPost() async {
     List<String> id = <String>[];
@@ -67,12 +68,13 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
     List<String> gender = <String>[];
     List<String> photo = <String>[];
     List<String> phno = <String>[];
+    List<String> threatlevel = <String>[];
 
     try {
       SharedPreferences sh = await SharedPreferences.getInstance();
       String urls = sh.getString('url').toString();
       String lid = sh.getString('lid').toString();
-      String url = '$urls/user_view_criminals/';
+      String url = '$urls/public_view_criminals/';
       var data = await http.post(Uri.parse(url), body: {'lid': lid});
       var jsondata = json.decode(data.body);
       String statuss = jsondata['status'];
@@ -86,6 +88,7 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
         gender.add(arr[i]['gender']);
         station.add(arr[i]['station']);
         details.add(arr[i]['details']);
+        threatlevel.add(arr[i]['threatlevel']);
         photo.add(sh.getString("img_url").toString() + arr[i]['photo']);
       }
       setState(() {
@@ -96,6 +99,7 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
         // post_ = post;
         // pin_ = pin;
         phno_ = phno;
+        threatlevel_ = threatlevel;
         station_=station;
         details_ = details;
         photo_ = photo;
@@ -129,7 +133,17 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
           backgroundColor: Color.fromARGB(250, 30, 90, 105),
           title: Text("Criminals"),
         ),
-        body: ListView.builder(
+        body:  Column(
+          children: [
+          Text(
+          'Criminals Lookout Notice', // Add your desired text here
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
           physics: BouncingScrollPhysics(),
           itemCount: id_.length,
           itemBuilder: (BuildContext context, int index) {
@@ -218,6 +232,17 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Text(
+                            "Threat Level:   " + threatlevel_[index],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: getThreatColor(threatlevel_[index]),
+                            ),
+                          ),
+                        ),
                         // Padding(
                         //   padding: EdgeInsets.all(5),
                         //   child: Row(
@@ -239,6 +264,18 @@ class _PublicViewCriminalsState extends State<PublicViewCriminals> {
           },
         ),
       ),
-    );
+  ])));
+  }
+}
+Color getThreatColor(String threatLevel) {
+  switch (threatLevel) {
+    case 'HIGH':
+      return Colors.red;
+    case 'MODERATE':
+      return Colors.orange;
+    case 'LOW':
+      return Colors.green;
+    default:
+      return Colors.black; // Default color
   }
 }
