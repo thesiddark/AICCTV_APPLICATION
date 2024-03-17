@@ -1,6 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:http/http.dart' as http;
 import 'package:aicctv/screens/Home.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workmanager/workmanager.dart';
 
 import '../user_changepassword.dart';
 import '../viewcomplaint.dart';
@@ -8,8 +15,10 @@ import '../viewdetectedcriminals.dart';
 import '../viewdetectedun.dart';
 
 void main() {
+
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -35,6 +44,11 @@ class Homenav extends StatefulWidget {
 }
 
 class _HomeState extends State<Homenav> {
+  _HomeState(){
+
+  }
+
+
   final items =  [
     Icon(Icons.home, size: 30, color: Colors.white),
   Image.asset('assets/images/fraud.png', width: 30, height: 30, color: Colors.white),

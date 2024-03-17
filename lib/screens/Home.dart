@@ -7,6 +7,7 @@ import 'package:aicctv/view_family_person.dart';
 import 'package:aicctv/view_police_station.dart';
 import 'package:aicctv/view_profile.dart';
 import 'package:aicctv/view_suspicious_activity.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:aicctv/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +18,7 @@ import 'package:aicctv/widgets/text_widget.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
+import 'package:workmanager/workmanager.dart';
 
 // import '../ip.dart';
 // import '../courses.dart';
@@ -30,6 +32,69 @@ import '../viewdetectedcriminals.dart';
 import '../viewdetectedun.dart';
 import '../widgets/BottomNavigation.dart';
 
+void main(){
+  // needed if you intend to initialize in the `main` function
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(Ho());
+}
+
+void callbackDispatcher(String message) {
+  print("hiii");
+
+  // Workmanager().executeTask((task, inputData) {
+  // initialise the plugin of flutterlocalnotifications.
+  FlutterLocalNotificationsPlugin flip =
+  new FlutterLocalNotificationsPlugin();
+
+  // app_icon needs to be a added as a drawable
+  // resource to the Android head project.
+  var android = new AndroidInitializationSettings('@mipmap/aicctv');
+  // var IOS = new IOSInitializationSettings();
+
+  // initialise settings for both Android and iOS device.
+  var settings = new InitializationSettings(android: android);
+  flip.initialize(settings);
+  _showNotificationWithDefaultSound(flip, message);
+  // return Future.value(true);
+  // });
+}
+
+Future _showNotificationWithDefaultSound(flip,String message) async {
+// Show a notification after every 15 minute with the first
+// appearance happening a minute after invoking the method
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'your channel id1', 'your channel name1',
+      importance: Importance.max, priority: Priority.high);
+
+// initialise channel platform for both Android and iOS device.
+  var platformChannelSpecifics =
+  new NotificationDetails(android: androidPlatformChannelSpecifics);
+  await flip.show(
+      0,
+      'Detection',
+      "detected"+message,
+      platformChannelSpecifics);
+}
+
+class Ho extends StatefulWidget {
+  const Ho({super.key});
+
+  @override
+  State<Ho> createState() => _HoState();
+}
+
+class _HoState extends State<Ho> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Home(),
+    );
+  }
+}
+
+
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -38,6 +103,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  _HomeState(){
+
+  }
   var opacity = 0.0;
   bool position = false;
 
@@ -50,6 +118,11 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+
+    Timer.periodic(Duration(seconds: 15), (timer) {
+      getdata();
+    });
     Future.delayed(Duration.zero, () {
       animator();
 
@@ -67,6 +140,56 @@ class _HomeState extends State<Home> {
       position = true;
     }
     setState(() {});
+  }
+
+  String Reminer = "", id = "", Date = "", Time = "";
+
+  Future<void> getdata() async {
+    SharedPreferences sh = await SharedPreferences.getInstance();
+    try {
+      // String url = "${sh.getString("url").toString()}/viewNotification/";
+
+
+      String url = sh.getString('url').toString();
+
+      final urls = Uri.parse('$url/view_notification/');
+
+      String nid="0";
+      if(sh.containsKey("nid")==false) {}
+      else{
+        nid=sh.getString('nid').toString();
+      }
+      Fluttertoast.showToast(msg:nid);
+
+      var datas = await http
+          .post(urls, body: {
+            'nid': nid ,
+            'lid': sh.getString("lid").toString()
+          });
+      var jsondata = json.decode(datas.body);
+      String status = jsondata['status'];
+      print(status);
+      if (status == "ok") {
+        String nid = jsondata['nid'].toString();
+        String message = jsondata['message'];
+        sh.setString('nid',nid);
+        callbackDispatcher(message);
+        // var data = json.decode(datas.body)['data'];
+        // setState(() {
+        //   for (int i = 0; i < data.length; i++) {
+        //     Reminer = (data[i]['Reminder'].toString());
+        //     id = (data[i]['id'].toString());
+        //     Date = (data[i]['Date']);
+        //     Time = (data[i]['Time']);
+        //   }
+        // });
+
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      print("Error ------------------- " + e.toString());
+      //there is error during converting file image to base64 encoding.
+    }
   }
 
   @override

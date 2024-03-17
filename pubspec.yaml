@@ -44,10 +44,11 @@ dependencies:
   google_fonts:
   video_player: ^2.7.2
   carousel_slider: ^4.2.1
-  flutter_local_notifications: ^17.0.0
+  flutter_local_notifications:
 
+  animate_do: ^3.3.4
   lottie: ^3.0.0
-
+  workmanager:
 
 
   # The following adds the Cupertino Icons font to your application.
