@@ -64,7 +64,7 @@ Future _showNotificationWithDefaultSound(flip,String message) async {
 // Show a notification after every 15 minute with the first
 // appearance happening a minute after invoking the method
   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'your channel id1', 'your channel name1',
+      'notification on detection', 'notification on detection1',
       importance: Importance.max, priority: Priority.high);
 
 // initialise channel platform for both Android and iOS device.
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
       else{
         nid=sh.getString('nid').toString();
       }
-      Fluttertoast.showToast(msg:nid);
+      //Fluttertoast.showToast(msg:nid);
 
       var datas = await http
           .post(urls, body: {

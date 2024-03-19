@@ -2,6 +2,7 @@ import 'dart:convert';
 
 // import 'package:facetrack/parent/chat_with_authority.dart';
 import 'package:aicctv/screens/Home.dart';
+import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -45,34 +46,34 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
 
   List<String> id_ = <String>[];
   List<String> LOGIN_id_ = <String>[];
-  List<String> name_ = <String>[];
-  List<String> gender_ = <String>[];
-  List<String> details_ = <String>[];
+ // List<String> name_ = <String>[];
+ // List<String> gender_ = <String>[];
+ // List<String> details_ = <String>[];
   List<String> place_ = <String>[];
-  List<String> post_ = <String>[];
-  List<String> pin_ = <String>[];
-  List<String> dist_ = <String>[];
+  //List<String> post_ = <String>[];
+ // List<String> pin_ = <String>[];
+ // List<String> dist_ = <String>[];
   List<String> photo_ = <String>[];
   List<String> date_ = <String>[];
   List<String> time_ = <String>[];
-  List<String> splace_ = <String>[];
-  List<String> sphoto_ = <String>[];
+  //List<String> splace_ = <String>[];
+// List<String> sphoto_ = <String>[];
   List<String> activity_ = <String>[];
 
   Future<void> ViewOwnPost() async {
     List<String> id = <String>[];
-    List<String> name = <String>[];
+   // List<String> name = <String>[];
     List<String> place = <String>[];
-    List<String> post = <String>[];
-    List<String> pin = <String>[];
-    List<String> dist = <String>[];
-    List<String> details = <String>[];
-    List<String> gender = <String>[];
+   // List<String> post = <String>[];
+   // List<String> pin = <String>[];
+    //List<String> dist = <String>[];
+    //List<String> details = <String>[];
+    //List<String> gender = <String>[];
     List<String> photo = <String>[];
     List<String> date = <String>[];
     List<String> time = <String>[];
-    List<String> splace = <String>[];
-    List<String> sphoto = <String>[];
+   // List<String> splace = <String>[];
+   // List<String> sphoto = <String>[];
     List<String> activity = <String>[];
     try {
       SharedPreferences sh = await SharedPreferences.getInstance();
@@ -92,13 +93,13 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
         place.add(arr[i]['place']);
         activity.add(arr[i]['activity']);
 
-        name.add(arr[i]['name']);
+      //  name.add(arr[i]['name']);
 
         photo.add(sh.getString("img_url").toString() + arr[i]['photo']);
       }
       setState(() {
         id_ = id;
-        name_ = name;
+     //   name_ = name;
         place_ = place;
         date_ = date;
         time_ = time;
@@ -119,6 +120,7 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        Navigator.push(context,MaterialPageRoute(builder: (CONTEXT) => Homenav(),));
         return true;
       },
       child: Scaffold(
@@ -133,7 +135,7 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
               );
             },
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Colors.white,
           title: Text("Suspecious Activity"),
         ),
         body: ListView.builder(
@@ -214,17 +216,7 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(5),
-                          child: Text(
-                            "Name:   " + name_[index],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
+
 
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
