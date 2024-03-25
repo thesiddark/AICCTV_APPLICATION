@@ -317,13 +317,13 @@ class _MyViewProfilePageState extends State<MyViewProfilePage> {
                                 ),
                               ),
                               Text(
-                                "Place    : " +
+                                "" +
                                     place_ +
-                                    ",\nPost       : " +
+                                    ",\n" +
                                     post_ +
-                                    ",\nDistrict : " +
+                                    ",\n" +
                                     district_ +
-                                    ", \nPIN      : " +
+                                    ", \n" +
                                     pincode_,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(

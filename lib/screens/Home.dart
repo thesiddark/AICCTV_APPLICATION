@@ -251,11 +251,21 @@ class _HomeState extends State<Home> {
                         children: [
                           Row(
                             children: [
-                              CircleAvatar(
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MyViewProfilePage(
+                                          title: '',
+                                        ),
+                                      ));
+                                },
+                                child: CircleAvatar(
                                 radius: 35,
                                 backgroundImage: NetworkImage(user_photo_),
-                              ),
-
+                              ),),
                               Column(
                                 children: [
                                   TextWidget(

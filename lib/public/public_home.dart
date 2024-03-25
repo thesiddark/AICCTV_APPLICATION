@@ -208,7 +208,10 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
                         radius: 50,backgroundColor: Colors.white,
                         backgroundImage: AssetImage("assets/images/emergency-call.png")),
                     onTap: () {
-                      _makePhoneCall('1234567890');
+                //      _makePhoneCall('1234567890');
+                //      _sendSMS('+919400664484', 'Hello from Flutter!');
+                //      sendSMS();
+                      _makePhoneCall('112');
                     },
                   ),
                   SizedBox(height: 5.0),
@@ -217,7 +220,7 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
                     children: [
                       Padding(
                         padding: EdgeInsets.all(1),
-                        child: Text("Emergency Call",
+                        child: Text("Emergency",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -235,10 +238,18 @@ class _PublicMyHomePageState extends State<PublicMyHomePage> {
   }
 }
 void _makePhoneCall(String phoneNumber) async {
-  final url = 'tel:$phoneNumber';
-  if (await canLaunch(url)) {
+  String url = 'tel:$phoneNumber';
+  try {
     await launch(url);
-  } else {
-    throw 'Could not launch $url';
+  } catch (e) {
+    print('Error launching phone call: $e');
   }
 }
+
+
+
+
+
+
+
+

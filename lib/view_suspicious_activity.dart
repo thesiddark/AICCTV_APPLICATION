@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 // import 'parent_home.dart';
 
@@ -227,7 +228,9 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
                               SharedPreferences sh =
                                   await SharedPreferences.getInstance();
                               String url = sh.getString('url').toString();
+
                               String lid = sh.getString('lid').toString();
+
                               String sid = id_[index].toString();
                               final urls = Uri.parse(
                                   '$url/forward_suspicious_activity_post/');
@@ -252,7 +255,9 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
                                     Fluttertoast.showToast(msg: 'Not Found');
                                   }
                                 } else {
-                                  Fluttertoast.showToast(msg: 'Network Error');
+                                  Fluttertoast.showToast(msg: 'Eroor: sms not sented');
+                                  _textMe();
+
                                 }
                               } catch (e) {
                                 Fluttertoast.showToast(msg: e.toString());
@@ -284,5 +289,26 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
         ),
       ),
     );
+  }
+}
+
+_textMe() async {
+  // Define the phone number and message body
+  const phoneNumber = '9400664484';
+  const message = 'user want to report suspicious activity';
+
+  // Define the URI for the SMS
+  final uri = Uri(
+    scheme: 'sms',
+    path: phoneNumber,
+    queryParameters: {'body': message},
+  );
+
+  try {
+    // Attempt to launch the SMS application
+    await launch(uri.toString());
+  } catch (e) {
+    // Handle errors that occur during the process
+    print('Error launching SMS: $e');
   }
 }

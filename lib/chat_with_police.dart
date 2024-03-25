@@ -70,7 +70,7 @@ class _MyChatPageState extends State<MyChatPage> {
 
   Future<void> view_message() async {
     final pref = await SharedPreferences.getInstance();
-    name = "Hello" ;pref.getString("name").toString();
+    name = "chat" ;pref.getString("name").toString();
 
     // setState(() {
     //   name = name;
@@ -211,7 +211,7 @@ class _MyChatPageState extends State<MyChatPage> {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Icon(
-                        Icons.add,
+                        Icons.question_answer,
                         color: Colors.white,
                         size: 20,
                       ),

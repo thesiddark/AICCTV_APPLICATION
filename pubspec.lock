@@ -332,10 +332,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_ios
-      sha256: fadafce49e8569257a0cad56d24438a6fa1f0cbd7ee0af9b631f7492818a4ca3
+      sha256: "917a5cadd67d052554cfb258595e54217de53fac5b52939426e26319a02e6297"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.9+1"
+    version: "0.8.9+2"
   image_picker_linux:
     dependency: transitive
     description:
@@ -532,10 +532,10 @@ packages:
     dependency: transitive
     description:
       name: permission_handler_apple
-      sha256: bdafc6db74253abb63907f4e357302e6bb786ab41465e8635f362ee71fd8707b
+      sha256: "8c90be7f8244eeb2bbfa4248221d38a66ca3e3cc3ab967a25a2529d86eee7c45"
       url: "https://pub.dev"
     source: hosted
-    version: "9.4.0"
+    version: "9.4.1"
   permission_handler_html:
     dependency: transitive
     description:
