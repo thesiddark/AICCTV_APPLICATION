@@ -6,6 +6,7 @@ import 'package:aicctv/widgets/BottomNavigation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 
@@ -292,6 +293,10 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  Text(
+                                    "ID: " + id_[index],
+                                    style: TextStyle(fontSize: 16),
+                                  ),
                                   SizedBox(height: 8),
                                   // Add spacing between text elements
                                   Text(
@@ -303,6 +308,24 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
                                     "Time: " + time_[index],
                                     style: TextStyle(fontSize: 16),
                                   ),
+                                  ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        foregroundColor: Color.fromARGB(245, 12, 12, 35),
+                                      ),
+                                      onPressed: () async {
+                                        // Call _textMe function with the phone number, message, and additional details
+                                        await _textMe(
+                                          '7994402146', // Phone number
+                                          'CRIMINAL DETECTED .ATTENTION NEEDED(ASAP). Details:',
+                                          id_[index], // Message
+                                          date_[index], // Date
+                                          time_[index], // Time
+                                          cname_[index]// Place
+                                        );
+                                      },
+
+                                      child: Text('Report to police')),
                                 ],
                               ),
                             ),
@@ -316,5 +339,24 @@ class _ViewDetectedCriminalsPageState extends State<ViewDetectedCriminalsPage> {
         },
       );
     }
+  }
+}
+_textMe(String phoneNumber, String message,String id, String date, String time, String cname) async {
+  // Construct the message including other details
+  final fullMessage = '$message\nDate: $date\nID: $id\nTime: $time\nCriminal Name: $cname';
+
+  // Define the URI for the SMS
+  final uri = Uri(
+    scheme: 'sms',
+    path: phoneNumber,
+    queryParameters: {'body': fullMessage},
+  );
+
+  try {
+    // Attempt to launch the SMS application
+    await launch(uri.toString());
+  } catch (e) {
+    // Handle errors that occur during the process
+    print('Error launching SMS: $e');
   }
 }

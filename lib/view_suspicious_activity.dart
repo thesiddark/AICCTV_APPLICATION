@@ -137,7 +137,7 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
             },
           ),
           backgroundColor: Colors.white,
-          title: Text("Suspecious Activity"),
+          title: Text("Suspicious Activity"),
         ),
         body: ListView.builder(
           physics: BouncingScrollPhysics(),
@@ -225,46 +225,18 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
                               foregroundColor: Color.fromARGB(245, 12, 12, 35),
                             ),
                             onPressed: () async {
-                              SharedPreferences sh =
-                                  await SharedPreferences.getInstance();
-                              String url = sh.getString('url').toString();
-
-                              String lid = sh.getString('lid').toString();
-
-                              String sid = id_[index].toString();
-                              final urls = Uri.parse(
-                                  '$url/forward_suspicious_activity_post/');
-                              try {
-                                final response = await http.post(urls, body: {
-                                  'lid': lid,
-                                  'cr': sid,
-                                });
-                                if (response.statusCode == 200) {
-                                  String status =
-                                      jsonDecode(response.body)['status'];
-                                  if (status == 'ok') {
-                                    Fluttertoast.showToast(
-                                        msg: 'Forward Successfully');
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Home(),
-                                      ),
-                                    );
-                                  } else {
-                                    Fluttertoast.showToast(msg: 'Not Found');
-                                  }
-                                } else {
-                                  Fluttertoast.showToast(msg: 'Eroor: sms not sented');
-                                  _textMe();
-
-                                }
-                              } catch (e) {
-                                Fluttertoast.showToast(msg: e.toString());
-                              }
-                              // },
-                              // child: Text("Cancel"),
+                              // Call _textMe function with the phone number, message, and additional details
+                              await _textMe(
+                                '7994402146', // Phone number
+                                'User wants to report suspicious activity(ASAP). Details:',
+                                id_[index], // Message
+                                date_[index], // Date
+                                time_[index], // Time
+                                place_[index], // Place
+                                activity_[index], // Activity
+                              );
                             },
+
                             child: Text('Forward')),
 
                         // Padding(
@@ -291,17 +263,15 @@ class _ViewSuspiciousActivityState extends State<ViewSuspiciousActivity> {
     );
   }
 }
-
-_textMe() async {
-  // Define the phone number and message body
-  const phoneNumber = '9400664484';
-  const message = 'user want to report suspicious activity';
+_textMe(String phoneNumber, String message,String id, String date, String time, String place, String activity) async {
+  // Construct the message including other details
+  final fullMessage = '$message\nDate: $date\nID: $id\nTime: $time\nPlace: $place\nActivity: $activity';
 
   // Define the URI for the SMS
   final uri = Uri(
     scheme: 'sms',
     path: phoneNumber,
-    queryParameters: {'body': message},
+    queryParameters: {'body': fullMessage},
   );
 
   try {
